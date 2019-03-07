@@ -65,9 +65,6 @@ export default {
         }
     },
     methods:{
-        login(){
-            this.$router.push('/login')
-        },
         submitFrom(fromName){
             //通过vue对象获取elementuiDOM对象，触发事件
             this.$refs[fromName].validate((valid) => {
@@ -90,6 +87,10 @@ export default {
                     })
                 }
             })
+        }
+        ,
+        login(){
+            this.$router.push('/login')
         }
     }
 }

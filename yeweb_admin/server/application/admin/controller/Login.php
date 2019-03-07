@@ -26,7 +26,7 @@ class Login extends Controller{
                 'username'=>$result['username'],
                 'avatar'=>$result['avatar']
             ];
-            // return json_encode('ok');
+            
             return json_encode($data);
         }
     }
