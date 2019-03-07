@@ -12,7 +12,10 @@
 // 应用行为扩展定义文件
 return [
     // 应用初始化
-    'app_init'     => [],
+    'app_init'     => [
+        //实现跨域请求
+        'app\\api\\behavior\\CORS',
+    ],
     // 应用开始
     'app_begin'    => [],
     // 模块初始化
