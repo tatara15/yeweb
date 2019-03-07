@@ -1,6 +1,7 @@
 <?php
 namespace app\admin\model;
 use think\Model;
+use think\Db;
 //管理员模型
 class Admin extends Model{
     /**
@@ -9,12 +10,25 @@ class Admin extends Model{
      * @return boolean 正确为true 错误false
      */
     public function login($data){
-        
+        //查询用户名
+        $result = Db::name('Admin')->where(['username'=>$data['username']])->find();
         //判断用户名是否存在
-        if(model('Admin')->where(['username'=>$data['username']])->get()){
-            return 1;
+        if(!$result){
+            //不存在返回false
+            return false;
         }
-        // return model('Admin')->where(['username'=>$data['username']])->get();
-        return 2;
+        //验证密码是否正确
+        if($result['password']!=md6($data['password'],$result['salt'])){
+            //密码不正确返回false
+            return false;
+        }
+        //组织返回信息
+        $data = [
+            'username'=>$result['username'],
+            'token'=>getToken('admin','login','login',time(),$result['salt']),
+            'avatar'=>$result['avatar'],
+        ];
+        //如果用户密码正确返回token
+        return $data;
     }
 }

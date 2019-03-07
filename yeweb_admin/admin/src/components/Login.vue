@@ -35,6 +35,12 @@ export default {
             }
         }
     },
+    watch:{
+        'login.username':function(){
+            localStorage.setItem('username',this.username)
+        }
+    }
+    ,
     methods:{
         /**
          * 接收表单提交的方法
@@ -47,7 +53,24 @@ export default {
                 if(valid){
                     //向后台请求
                     login(this.login).then((res)=>{
-                        console.log(res)
+                        //成功返回值为0，如果取反成功则表示验证成功
+                        if(!res['status']){
+                            //保存后台返回来的token,用户名，头像
+                            localStorage.setItem('token',res['token'])
+                            localStorage.setItem('username',res['username'])
+                            localStorage.setItem('avatar',res['avatar'])
+                            //登录成功跳转到后台首页
+                            this.$router.push('/')
+                            //提示信息
+                            this.$message({
+                                message: res['msg'],
+                                type: 'success'
+                            });
+                        }else{
+                        //提示信息
+                        this.$message.error(res['msg'])
+                        }
+                        
                     })
                 }
             })
