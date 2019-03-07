@@ -83,6 +83,9 @@ export default {
                             });
                             //跳转到login
                             this.$router.push('/login')
+                        }else{
+                            //提示错误信息
+                            this.$message.error(res['msg'])
                         }
                     })
                 }

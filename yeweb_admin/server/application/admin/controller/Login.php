@@ -50,12 +50,13 @@ class Login extends Controller{
                     'msg'=>'服务器内部错误',
                     'status'=>2,
                 ];
+            }else{
+                //添加成功
+                $data = [
+                    'msg'=>'注册成功',
+                    'status'=>0,  
+                ];
             }
-            //添加成功
-            $data = [
-                'msg'=>'注册成功',
-                'status'=>0,  
-            ];
             return json_encode($data);
         }
     }

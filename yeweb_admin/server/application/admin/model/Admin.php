@@ -40,7 +40,6 @@ class Admin extends Model{
     public function register($data){
         //查询用户名是否存在
         $result = Db::name('Admin')->where(['username'=>$data['username']])->find();
-        dump($result);exit;
         //如果用户名存在则返回false
         if($result){
             return 1;
@@ -56,7 +55,7 @@ class Admin extends Model{
         ];
         //把数据存入数据库
         $res = Db::name('Admin')->insert($admin);
-        if(!Db::name('Admin')->insert($data)){
+        if(!$res){
             return 2;
         }
         //如果成功则返回0
