@@ -7,7 +7,7 @@ class Admin extends Model{
     /**
      * 实现用户登录的模型方法
      * @param array 用户数据
-     * @return boolean 正确为true 错误false
+     * @return array|boolean 前端所需相关数据|错误则返回false
      */
     public function login($data){
         //查询用户名
@@ -31,4 +31,35 @@ class Admin extends Model{
         //如果用户密码正确返回token
         return $data;
     }
-}
+
+    /**
+     * 注册的方法
+     * @param araay 表单数据
+     * @return araay|int 前端所需相关数据|错误则返回1:用户名已存在，2：存入数据错误
+     */
+    public function register($data){
+        //查询用户名是否存在
+        $result = Db::name('Admin')->where(['username'=>$data['username']])->find();
+        dump($result);exit;
+        //如果用户名存在则返回false
+        if($result){
+            return 1;
+        }
+        //如果用户名不存在则进行注册
+        //组装盐
+        $salt = rand(1000,9999);
+        //组装用户信息
+        $admin = [
+            'username'=>$data['username'],
+            'password'=>md6($data['password'],$salt),
+            'salt'=>$salt
+        ];
+        //把数据存入数据库
+        $res = Db::name('Admin')->insert($admin);
+        if(!Db::name('Admin')->insert($data)){
+            return 2;
+        }
+        //如果成功则返回0
+        return 0;
+    }
+} 

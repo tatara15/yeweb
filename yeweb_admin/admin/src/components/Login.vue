@@ -17,7 +17,7 @@
                     <el-button type="primary" class="login-btn" @click="loginFrom('loginForm')">登录</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="info" plain class="login-btn">马上注册</el-button>
+                    <el-button type="info" plain class="login-btn" @click="register()">马上注册</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -29,15 +29,15 @@ import {login} from '@/api'
 export default {
     data() { 
         return {
-            login:{
-                username:'',
+            login:{            
+                username:localStorage.getItem('username'), 
                 password:''
             }
         }
     },
     watch:{
         'login.username':function(){
-            localStorage.setItem('username',this.username)
+            localStorage.setItem('username',this.login.username)
         }
     }
     ,
@@ -70,10 +70,12 @@ export default {
                         //提示信息
                         this.$message.error(res['msg'])
                         }
-                        
                     })
                 }
             })
+        },
+        register(){
+            this.$router.push('/register')
         }
     }
 }

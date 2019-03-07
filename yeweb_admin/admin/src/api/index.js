@@ -13,3 +13,12 @@ axios.defaults.baseURL = 'http://www.yeweb.com/index.php/'
 export var login = function(data){
     return axios.post('admin/login/login',data).then((res)=>res.data)
 }
+
+/**
+ * 注册接口
+ * @param array 表单数据
+ * @return json 返回后台数据
+ */
+export var register = function(data){
+    return axios.post('admin/login/register',data).then((res)=>res.data)
+}
