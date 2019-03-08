@@ -41,8 +41,8 @@
                 <div class="system-title">yeweb后台管理系统</div>
                 <!-- 欢迎信息 -->
                 <div class="welcome">
-                    欢迎,&nbsp;&nbsp;
-                    <el-button type="primary" round >退出</el-button>
+                    欢迎{{username}},&nbsp;&nbsp;
+                    <el-button type="primary" round @click="loginout()" >退出</el-button>
                 </div>
             </el-header>
             <!-- 头部结束 -->
@@ -64,8 +64,21 @@
 export default {
     data() { 
         return {
-
+          username:localStorage.getItem('username')
         }
+    },
+    methods:{
+      //退出登录
+      loginout(){
+        localStorage.removeItem('username')
+        localStorage.removeItem('token')
+        this.$router.push('/login')
+        //提示信息
+        this.$message({
+            message:'退出成功',
+            type: 'success'
+        });
+      }
     }
 }
 </script>
