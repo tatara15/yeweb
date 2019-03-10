@@ -2,30 +2,29 @@
   <div class="home">
     <el-container>
       <!-- 左侧容器 -->
-      <el-aside class="aside" width="200px">
+      <el-aside class="aside" width="auto">
         <!-- logo -->
         <div class="logo"></div>
         <!-- 侧边栏 -->
         <el-menu
-          default-active="1-4-1"
+          default-active="0"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
-          :collapse="isCollapse"
-        >
-          <el-menu-item index="4">
-            <i class="el-icon-menu"></i>
-            <span slot="title">首页</span>
+          :collapse="isCollapse">
+          <el-menu-item index="0">
+            <i class="el-icon-menu" @click="isCollapse = !isCollapse"></i>
+            <span slot="title"><router-link to="/">首页</router-link></span>
           </el-menu-item>
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-service"></i>
               <span slot="title">用户管理</span>
             </template>
-            <el-submenu index="1-1">
+            <el-menu-item index="1-1">子项1</el-menu-item>
+            <!-- 三级菜单
+                <el-submenu index="1-1">
               <span slot="title">折叠菜单1</span>
               <el-menu-item index="1-1-1">子项1</el-menu-item>
-            </el-submenu>
+            </el-submenu> -->
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -34,7 +33,14 @@
             </template>
             <el-menu-item index="2-1">文章列表</el-menu-item>
           </el-submenu>
-          <el-menu-item index="3">
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-message"></i>
+              <span slot="title">消息管理</span>
+            </template>
+            <el-menu-item index="2-1"><router-link to="/Message">消息列表</router-link></el-menu-item>
+          </el-submenu>
+          <el-menu-item index="10">
             <i class="el-icon-setting"></i>
             <span slot="title">设置</span>
           </el-menu-item>
@@ -57,12 +63,14 @@
         </el-header>
         <!-- 头部结束 -->
         <!-- 网页主体 -->
-        <el-main>主体
+        <el-main>
           <router-view></router-view>
         </el-main>
         <!-- 网页主体结束 -->
         <!-- 页尾 -->
-        <el-footer>页尾</el-footer>
+        <el-footer>
+          页尾
+          </el-footer>
         <!-- 页尾结束 -->
       </el-container>
     </el-container>
@@ -73,7 +81,9 @@
 export default {
   data() {
     return {
-      username: localStorage.getItem("username")
+      username: localStorage.getItem("username"),
+      // 导航菜单是否展开
+      isCollapse:false,
     };
   },
   methods: {
@@ -97,6 +107,7 @@ export default {
   height: 100%;
   // 导航菜单
   .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
     background-color: #bdc0c4;
   }
   // 导航菜单 子样式
@@ -112,7 +123,9 @@ export default {
   .logo {
     height: 60px;
     background: url(../images/logo.png);
-    background-size: cover;
+    background-size: 170px 56px;
+    background-repeat: no-repeat;
+    background-position-y: center;
     background-color: #bdc0c4;
   }
   .toggle-btn {

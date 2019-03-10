@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import register from '@/components/register'
+import Message from '@/components/Message'
 
 Vue.use(Router)
 
@@ -11,7 +12,10 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      children:[
+        {path:'/Message',name:'Message',component:Message},
+      ]
     },
     {
       path: '/login',
