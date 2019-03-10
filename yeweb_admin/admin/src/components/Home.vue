@@ -57,7 +57,7 @@
           <div class="system-title">yeweb后台管理系统</div>
           <!-- 欢迎信息 -->
           <div class="welcome">
-            欢迎{{username}},&nbsp;&nbsp;
+            欢迎 <span style="color:blue">{{username}}</span>,&nbsp;&nbsp;
             <el-button type="primary" round @click="loginout()">退出</el-button>
           </div>
         </el-header>
@@ -68,9 +68,8 @@
         </el-main>
         <!-- 网页主体结束 -->
         <!-- 页尾 -->
-        <el-footer>
-          页尾
-          </el-footer>
+        <el-footer>页尾
+        </el-footer>
         <!-- 页尾结束 -->
       </el-container>
     </el-container>
@@ -136,10 +135,10 @@ export default {
   }
   .system-title {
     font-size: 28px;
-    color: white;
+    color: #303133;
   }
   .welcome {
-    color: white;
+    color: #303133;
   }
 }
 </style>
