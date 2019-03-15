@@ -15,4 +15,8 @@ export default {
     margin: 0;
     padding: 0;
   }
+  a {
+    color: #303133;
+    text-decoration: none;
+  }
 </style>
